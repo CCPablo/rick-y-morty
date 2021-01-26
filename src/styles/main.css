@@ -1,0 +1,26 @@
+
+.section__characters {
+    width: 100%;
+    display: flex;
+    padding: 100px;
+}
+
+.character {
+    background-color: yellow;
+    border-radius: 5%;
+}
+
+.character-img {
+    padding: 28px;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+}
+
+.character-info {
+    padding: 0 16px;
+}
+
+.character-name {
+    margin-bottom: 8px;
+}

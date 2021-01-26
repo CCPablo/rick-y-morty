@@ -1,0 +1,178 @@
+
+.initial-screen {
+    position: fixed;
+    z-index: 2;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+}
+
+.initial-screen .portal-gun-wrapper {
+    width: fit-content;
+    position: relative;
+    width: 300px;
+}
+
+.initial-screen .portal-gun {
+    width: 100%;
+}
+
+.initial-screen .portal-gun-crystal {
+    width: 17.7%;
+    position: absolute;
+    top: 0;
+    left: 58.5%;
+}
+
+.portal-gun-wrapper {
+    user-select: none;
+}
+
+.portal-gun-wrapper .button-selector{
+    cursor: pointer;
+    position: absolute;
+    width: 9%;
+    height: 9.59%;
+    top: 51%;
+    left: 29.9%;
+    transform: rotateZ(-25deg);
+    border-radius: 50%;
+}
+
+.initial-screen .portal {
+    min-width: 300px;
+    width: 30%;
+    cursor: pointer;
+    position: absolute;
+    filter: brightness(0.5);
+    transition: filter 0.2s linear;
+    transform: scale(0);
+    top: 30%;
+    left: 70%;
+}
+
+.initial-screen .portal:hover {
+    cursor: pointer;
+    filter: brightness(1);
+}
+
+.animation-portal-appear {
+    animation: portal-appear .5s ease-out forwards;
+}
+
+.animation-rotation {
+    animation: 2s rotation ease-in-out forwards;
+}
+
+.animation-portal-focus {
+    animation: 6s portal-focus linear forwards;
+}
+
+.animation-crystal-shoot {
+    animation: crystal-shoot .8s ease-in-out;
+}
+
+.animation-dive_in {
+    animation: dive-in 1.5s cubic-bezier(.9,0,1,1);
+}
+
+.animation-bright_up {
+    animation: bright-up 2s ease-in-out forwards;
+}
+
+.animation-show_up {
+    animation: show-up 1.4s cubic-bezier(.48,0,.64,1.32) forwards;
+}
+
+.animation-show_right {
+    animation: show-right 0.8s cubic-bezier(.48,0,.64,1.32) forwards;
+}
+
+@keyframes portal-appear {
+    from {
+        transform: scale(0) rotateX(10deg) rotateY(55deg) rotateZ(0deg);
+    }
+    to {
+        transform: scale(1) rotateX(10deg) rotateY(55deg) rotateZ(50deg);
+    }
+}
+
+@keyframes portal-focus {
+    from {
+        transform: rotateX(10deg) rotateY(55deg) rotateZ(50deg);
+    }
+    to {
+        width: 50%;
+        transform: translate(-50%, -50%) rotateX(0) rotateY(0) rotateZ(50deg);
+        top: 50%;
+        left: 50%;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotateX(10deg) rotateY(55deg) rotateZ(50deg);
+    }
+    to {
+        transform: rotateX(10deg) rotateY(55deg) rotateZ(360deg);
+    }
+}
+
+@keyframes crystal-shoot {
+    0% {
+        filter: brightness(1);
+    }
+    25% {
+        filter: brightness(1.4);
+    }
+    75% {
+        filter: brightness(1.4);
+    }
+    100% {
+        filter: brightness(1);
+    }
+}
+
+@keyframes dive-in {
+    from {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    to {
+        transform: scale(300);
+        filter: brightness(0);
+    }
+}
+
+@keyframes bright-up {
+    from {
+        background-color:black;
+    }
+    to {
+        background-color:white;
+
+    }
+}
+
+@keyframes show-up {
+    from {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes show-right {
+    from {
+        transform: translateX(100vw);
+    }
+    to {
+        transform: translateX(0);
+    }
+}

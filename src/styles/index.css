@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'GetSchwifty-Regular';
+    src: url('/src/assets/fonts/GetSchwifty-Regular.ttf') format('truetype'),
+         url('/src/assets/fonts/GetSchwifty-Regular.woff') format('woff'),
+         url('/src/assets/fonts/get_schwifty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Segoe UI','Roboto','Helvetica','Arial',sans-serif,'Apple Color Emoji','Segoe UI EPmoji','Segoe UI Symbol';
+}
+
+header {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.header__webtext {
+    margin: 0;
+    align-self: flex-end;
+    color: var(--corn);
+    font-size: 5.625rem;
+    font-family: 'GetSchwifty-Regular','Roboto','Helvetica','Arial',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+}
+
