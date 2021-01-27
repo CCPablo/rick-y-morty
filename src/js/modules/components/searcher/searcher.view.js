@@ -17,7 +17,6 @@ function renderSearcher() {
     fragment.appendChild(createSelectors())
     fragment.appendChild(createSearchFilters())
 
-
     const $searcher = document.querySelector('.nav_search-options')
     $searcher.innerHTML = ''
     $searcher.append(fragment)
@@ -56,7 +55,7 @@ function renderSearcher() {
         return $inputWrapper
     }
 
-    function createSearchSelect(type = 'episodes') {
+    function createSearchSelect(type = 'episode') {
         const $selectWrapper = document.createElement('div')
         $selectWrapper.className = 'nav__search__wrapper'
 
@@ -78,7 +77,7 @@ function renderSearcher() {
         $option.innerText = 'Order by'
         $select.appendChild($option)
 
-        getOptions(type).forEach(option => $select.appendChild(option))
+        getOptions(type).forEach((option) => $select.appendChild(option))
 
         $selectWrapper.appendChild($icon)
         $selectWrapper.appendChild($select)
@@ -89,19 +88,25 @@ function renderSearcher() {
     function createSelectors() {
         const $typeSelector = document.createElement('div')
         $typeSelector.className = 'nav__selectors'
-        $typeSelector.appendChild(createSelector('episodes', 'fas fa-tv', true))
-        $typeSelector.appendChild(createSelector('characters', 'far fa-user'))
-        $typeSelector.appendChild(createSelector('locations', 'fas fa-globe'))
+        $typeSelector.appendChild(createSelector('episode', 'fas fa-tv', true))
+        $typeSelector.appendChild(createSelector('character', 'far fa-user'))
+        $typeSelector.appendChild(createSelector('location', 'fas fa-globe'))
         return $typeSelector
 
         function createSelector(type, icon, selected = false) {
             const $selector = document.createElement('div')
             $selector.className = `nav__selector ${selected ? 'selected' : ''}`
             $selector.setAttribute('name', type)
-            $selector.addEventListener('click', function() {
-                $selector.parentNode.querySelectorAll('.nav__selector').forEach(selector => selector.classList.remove('selected'))
+            $selector.addEventListener('click', function () {
+                $selector.parentNode
+                    .querySelectorAll('.nav__selector')
+                    .forEach((selector) =>
+                        selector.classList.remove('selected')
+                    )
                 this.classList.add('selected')
-                const textValue = document.querySelector('.nav__search__text-input').value
+                const textValue = document.querySelector(
+                    '.nav__search__text-input'
+                ).value
                 renderSelect(this.getAttribute('name'))
                 requestItems(this.getAttribute('name'), textValue)
             })
@@ -116,7 +121,7 @@ function renderSearcher() {
     }
 }
 
-function renderSelect(type = 'episodes') {
+function renderSelect(type = 'episode') {
     const $select = document.querySelector('.nav__search__select')
     $select.innerHTML = ''
     $select.style.color = ''
@@ -129,21 +134,25 @@ function renderSelect(type = 'episodes') {
     $option.innerText = 'Order by'
     $select.appendChild($option)
 
-    getOptions(type).forEach(option => $select.appendChild(option))
+    getOptions(type).forEach((option) => $select.appendChild(option))
 }
 
 function getOptions(type) {
     let options = []
-    switch(type) {
-        case 'episodes': {
+    switch (type) {
+        case 'episode': {
             options.push(getOption('season', 'Season'))
-            options.push(getOption('episode', 'Episode'))
             break
         }
-        case 'characters': {
+        case 'character': {
             options.push(getOption('origin', 'Origin'))
             options.push(getOption('gender', 'Gender'))
             options.push(getOption('species', 'Species'))
+            break
+        }
+        case 'location': {
+            options.push(getOption('type', 'Type'))
+            options.push(getOption('dimension', 'Dimension'))
             break
         }
     }
@@ -159,102 +168,43 @@ function getOptions(type) {
 }
 
 function requestItems(type, text = '') {
-    switch (type) {
-        case 'episodes': {
-            try {
-                axios
-                    .get(`https://rickandmortyapi.com/api/episode`, {
-                        params: {
-                            name: text,
-                        },
-                    })
-                    .then((response) => {
-                        setNext(response.data.info.next)
-                        DISPATCHER.dispatch(
-                            ACTION_SET_SIDENAV({
-                                episodes: response.data.results,
-                                characters: [],
-                                locations: []
-                            })
-                        )
-                    })
-                    .catch((err) => {
-                        setNext(null)
-                        console.log(err)
-                        DISPATCHER.dispatch(ACTION_RESET_STATE())
-                    })
-            } catch (err) {}
-            break
-        }
-        case 'characters': {
-            try {
-                axios
-                    .get(`https://rickandmortyapi.com/api/character`, {
-                        params: {
-                            name: text,
-                        },
-                    })
-                    .then((response) => {
-                        setNext(response.data.info.next)
-                        DISPATCHER.dispatch(
-                            ACTION_SET_SIDENAV({
-                                episodes: [],
-                                characters: response.data.results,
-                                locations: []
-                            })
-                        )
-                    })
-                    .catch((err) => {
-                        setNext(null)
-                        DISPATCHER.dispatch(ACTION_RESET_STATE())
-                    })
-            } catch (err) {}
-            break
-        }
-        case 'locations': {
-            try {
-                axios
-                    .get(`https://rickandmortyapi.com/api/location`, {
-                        params: {
-                            name: text,
-                        },
-                    })
-                    .then((response) => {
-                        setNext(response.data.info.next)
-                        DISPATCHER.dispatch(
-                            ACTION_SET_SIDENAV({
-                                episodes: [],
-                                characters: response.data.results,
-                                locations: []
-                            })
-                        )
-                    })
-                    .catch((err) => {
-                        setNext(null)
-                        DISPATCHER.dispatch(ACTION_RESET_STATE())
-                    })
-            } catch (err) {}
-        }
-    }
+    try {
+        axios
+            .get(`https://rickandmortyapi.com/api/${type}`, {
+                params: {
+                    name: text,
+                },
+            })
+            .then((response) => {
+                setNext(response.data.info.next)
+                let payload = {
+                    episode: [],
+                    character: [],
+                    location: []
+                }
+                payload[type] = response.data.results
+                DISPATCHER.dispatch(
+                    ACTION_SET_SIDENAV(payload)
+                )
+            })
+            .catch((err) => {
+                setNext(null)
+                console.log(err)
+                DISPATCHER.dispatch(ACTION_RESET_STATE())
+            })
+    } catch (err) {}
 }
 
 export function getType() {
-    return document.querySelector('.nav__selector.selected').getAttribute('name')
+    return document
+        .querySelector('.nav__selector.selected')
+        .getAttribute('name')
 }
 
 export function getSelectOrderData() {
     const $select = document.querySelector('.nav__search__select')
     return {
         value: $select.value,
-        name: $select.getAttribute('name')
-    }
-}
-
-export function getSettings() {
-    const type = document
-        .querySelector('.nav__selector.active')
-        .getAttribute('name')
-    return {
-        type: type,
+        name: $select.getAttribute('name'),
     }
 }

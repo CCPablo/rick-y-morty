@@ -1,7 +1,8 @@
 
 .initial-screen {
     position: fixed;
-    z-index: 2;
+    z-index: 6;
+    top: 0;
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -11,9 +12,11 @@
 }
 
 .initial-screen .portal-gun-wrapper {
-    width: fit-content;
-    position: relative;
-    width: 300px;
+    position: fixed;
+    width: 250px;
+    top: 50%;
+    left: 20%;
+    transform: translateY(-20%);
 }
 
 .initial-screen .portal-gun {
@@ -44,14 +47,14 @@
 
 .initial-screen .portal {
     min-width: 300px;
-    width: 30%;
+    width: 400px;
     cursor: pointer;
-    position: absolute;
     filter: brightness(0.5);
     transition: filter 0.2s linear;
+}
+
+.portal-hidden {
     transform: scale(0);
-    top: 30%;
-    left: 70%;
 }
 
 .initial-screen .portal:hover {
@@ -60,19 +63,23 @@
 }
 
 .animation-portal-appear {
-    animation: portal-appear .5s ease-out forwards;
+    animation: portal-appear 2s linear forwards;
 }
 
 .animation-rotation {
-    animation: 2s rotation ease-in-out forwards;
+    animation: rotation 8s linear infinite forwards;
 }
 
 .animation-portal-focus {
-    animation: 6s portal-focus linear forwards;
+    animation: portal-focus 1s linear forwards;
 }
 
 .animation-crystal-shoot {
     animation: crystal-shoot .8s ease-in-out;
+}
+
+.animation-gun-disapper {
+    animation: opacity-down 1s forwards;
 }
 
 .animation-dive_in {
@@ -92,32 +99,45 @@
 }
 
 @keyframes portal-appear {
-    from {
-        transform: scale(0) rotateX(10deg) rotateY(55deg) rotateZ(0deg);
+    0% {
+        margin-left: 500px;
+        filter: brightness(1);
+        transform: scale(0) rotateX(10deg) rotateY(50deg) rotateZ(0deg);
     }
-    to {
-        transform: scale(1) rotateX(10deg) rotateY(55deg) rotateZ(50deg);
+    50% {
+        margin-left: 500px;
+        filter: brightness(1);
+        transform: scale(1) rotateX(10deg) rotateY(50deg) rotateZ(55deg);
+    }
+    100% {
+        margin-left: 500px;
+        filter: brightness(1);
+        transform: scale(1) rotateX(10deg) rotateY(50deg) rotateZ(110deg);
     }
 }
 
 @keyframes portal-focus {
     from {
-        transform: rotateX(10deg) rotateY(55deg) rotateZ(50deg);
+        margin-left: 500px;
+        filter: brightness(1);
+        transform: rotateX(10deg) rotateY(50deg) rotateZ(55deg);
     }
     to {
+        margin-left: 0;
         width: 50%;
-        transform: translate(-50%, -50%) rotateX(0) rotateY(0) rotateZ(50deg);
-        top: 50%;
-        left: 50%;
+        transform: rotateX(0) rotateY(0) rotateZ(140deg);
+
     }
 }
 
-@keyframes rotate {
-    from {
-        transform: rotateX(10deg) rotateY(55deg) rotateZ(50deg);
+@keyframes rotation {
+    from {        
+        width: 600px;
+        transform: rotateZ(110deg);
     }
-    to {
-        transform: rotateX(10deg) rotateY(55deg) rotateZ(360deg);
+    to {        
+        width: 600px;
+        transform: rotateZ(470deg);
     }
 }
 
@@ -153,7 +173,15 @@
     }
     to {
         background-color:white;
+    }
+}
 
+@keyframes opacity-down {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
     }
 }
 

@@ -1,0 +1,131 @@
+
+
+.content {
+    padding: 28px 0;
+}
+
+.content .title {
+    margin: 0 100px;
+    font-size: 48px;
+    font-weight: 700;
+    border-bottom: 2px solid rgb(179, 179, 179);
+    position: relative;
+}
+
+.content .title.character {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content .title img {
+    height: 150px;
+    border-radius: 50%;
+}
+
+.content .title .episode {
+    font-size: 32px;
+    font-weight: 500;
+    color: rgb(122, 122, 122);
+    margin-bottom: 8px;
+}
+
+.content .items-description {
+    font-size: 26px;
+    font-weight: 300;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    color: rgb(122, 122, 122);
+}
+
+.content .item-list {
+    margin: 0 50px;
+}
+
+.content .item-list ul {
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    list-style: none;
+    margin-top: 36px;
+}
+
+.content .item-list .item {
+    width: 400px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.content .item-list .item:hover .item-img {
+    transform: scale(1.1)
+}
+
+.content .item-img {
+    padding: 16px;
+    width: 140px;
+    position: relative;
+    cursor: pointer;
+    border-radius: 25%;
+    transition: transform 0.3s;
+}
+
+.content .item-info {
+    padding: 16px 16px;
+    transition: transform 0.4s;
+}
+
+.content .item-status {
+    margin-top: 16px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 8px;
+}
+
+.content .item-status .status {
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
+    background-color: rgb(66, 66, 66);
+}
+
+.content .item-name {
+    margin-bottom: 8px;
+    margin: 0;
+    width: fit-content;
+    cursor: pointer;
+}
+
+
+.content .item-name::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: var(--light-coral);
+    transition: width .4s;
+}
+
+.content .item-origin {
+    width: fit-content;
+    cursor: pointer;
+}
+
+.content .item-origin:hover {
+    color: var(--light-coral);
+
+}
+
+.content .item-name:hover::after {
+    width: 100%;
+}
+
+.content .item-img:hover ~ .item-info .item-name::after {
+    width: 100%;
+}

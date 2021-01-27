@@ -7,10 +7,14 @@
     <script src="https://kit.fontawesome.com/4f8800fac8.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0-0/axios.js" type="text/javascript"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gabriela&family=Sue+Ellen+Francisco&display=swap" rel="stylesheet">
     <script type="module" defer src="/src/js/index.js"></script>
     <script type="modules" defer src="/src/js/modules"></script>
     <link rel="stylesheet" href="./src/styles/index.css">
     <link rel="stylesheet" href="./src/styles/main.css">
+    <link rel="stylesheet" href="./src/styles/content.css">
     <link rel="stylesheet" href="./src/styles/initial-screen.css">
     <link rel="stylesheet" href="./src/styles/sidenav.css">
     <link rel="stylesheet" href="./src/styles/theme.css">
@@ -23,31 +27,19 @@
             <img class="portal-gun-crystal" src="src/assets/images/gun_cristal.png" alt="">
             <div class="button-selector"></div>
         </div>
-        <img class="portal" width="30%" src="src/assets/images/portal.png" alt="portal loader">
+        <img class="portal portal-hidden" width="30%" src="src/assets/images/portal.png" alt="portal loader">
     </section>
     <header class="header">
-        <img class="header__logo" height="200" src="src/assets/images/title-header.png" alt="header logo">
-        <h1 class="header__webtext">web</h1>
+        <img class="header__logo" src="src/assets/images/title.png" alt="header logo">
+        <h1 class="header__webtext">WEB</h1>
     </header>
     <nav class="sidenav">
+        <button class="sidenav__opener"> <i class="fas fa-bars"></i></button>
         <div class="nav_search-options"></div>
         <div class="nav__results"></div>
     </nav>
     <main>
-        <section class="section__characters">
-            <article class="character">
-                <img class="character-img" src="https://rickandmortyapi.com/api/character/avatar/50.jpeg" alt="Imagen de caracter">
-                <div class="character-info">
-                    <h2 class="character-name">
-                        Rick Sánchez
-                    </h2>
-                    <div class="character-type_loc">
-                        <span>Human</span>
-                        <span> from </span>
-                        <span>Earth</span>
-                    </div>
-                </div>
-            </article>
+        <section class="content">
         </section>
     </main>
 </body>

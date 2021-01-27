@@ -12,13 +12,6 @@ export const ACTION_SET_SIDENAV = (payload) => {
     }
 }
 
-export const ACTION_SET_CHARACTERS = (characters) => {
-    return {
-        type: 'set-episodes',
-        characters: characters,
-    }
-}
-
 export const ACTION_RESET_STATE = () => {
     return {
         type: 'reset-state'

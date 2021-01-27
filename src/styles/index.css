@@ -7,24 +7,83 @@
     font-style: normal;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     overflow-x: hidden;
-    font-family: 'Segoe UI','Roboto','Helvetica','Arial',sans-serif,'Apple Color Emoji','Segoe UI EPmoji','Segoe UI Symbol';
+    color: rgb(41, 41, 41);
+    font-family: 'Gabriela', serif;
 }
 
 header {
+    margin: 40px 100px;
     display: flex;
     gap: 8px;
     align-items: center;
     justify-content: center;
 }
 
+.header__logo {
+    width: 60%;
+    min-width: 400px;
+    max-width: 850px;
+}
+
 .header__webtext {
     margin: 0;
     align-self: flex-end;
-    color: var(--corn);
-    font-size: 5.625rem;
-    font-family: 'GetSchwifty-Regular','Roboto','Helvetica','Arial',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+    color: #9d1b1e;
+    font-size: 4vw;
+    font-family: 'Sue Ellen Francisco', cursive;
 }
 
+.sidenav__opener {
+    position: fixed;
+    top: 20px;
+    left: 100%;
+    padding: 0;
+    overflow: hidden;
+    width: 0;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: 32px;
+    cursor: pointer;
+    transition: width .5s;
+}
+
+.sidenav.closed .sidenav__opener {
+    width: 100px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f5f5f5;
+    border-radius: 50%;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--light-coral);
+    border-radius: 10px;
+    background-image: -webkit-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.5) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0.5) 75%,
+        transparent 75%,
+        transparent
+    );
+}
+
+::-webkit-scrollbar-thumb:hover {
+}

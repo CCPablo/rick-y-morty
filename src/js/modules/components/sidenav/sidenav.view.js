@@ -30,9 +30,9 @@ function loadNext() {
     }
     axios.get(next).then((response) => {
         let payload = {
-            episodes: [],
-            characters: [],
-            locations: []
+            episode: [],
+            character: [],
+            location: []
         }
         payload[getType()] = response.data.results
         DISPATCHER.dispatch(ACTION_APPEND_SIDENAV(payload))
@@ -84,8 +84,6 @@ function renderResults(state) {
                 {value: selectData.value, name: selectData.name} :
                 getDefaultOrderData(type)
             const wrappedItems = groupBy(state[type], groupData.value)
-            console.log('groupData', groupData)
-            console.log('wrapped', wrappedItems)
             appendWrappedItems(fragment, wrappedItems, groupData.name)
         }
 
@@ -125,16 +123,22 @@ function renderResults(state) {
 
     function getDefaultOrderData(type) {
         switch(type) {
-            case 'episodes': {
+            case 'episode': {
                 return {
                     value: 'season',
                     name: 'Season'
                 }
             }
-            case 'characters': {
+            case 'character': {
                 return {
                     value: 'origin',
                     name: 'Origin'
+                }
+            }
+            case 'location': {
+                return {
+                    value: 'type',
+                    name: 'Type'
                 }
             }
         }
@@ -142,8 +146,8 @@ function renderResults(state) {
 }
 
 
-function groupBy(episodes, splitValue) {
-    return episodes.reduce((acc, ep) => {
+function groupBy(episode, splitValue) {
+    return episode.reduce((acc, ep) => {
         if (typeof acc[ep[splitValue]] !== 'object') {
             acc[ep[splitValue]] = []
         }

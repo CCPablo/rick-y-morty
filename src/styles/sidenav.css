@@ -1,15 +1,22 @@
 .sidenav {
     position: fixed;
+    z-index: 2;
     bottom: 0;
     top: 0;
     border-right: 3px double rgb(182, 182, 182);
     width: 600px;
     background-color: white;
     padding: 16px;
-    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     gap: 16px;
+    font-family: 'Segoe UI','Roboto','Helvetica','Arial',sans-serif,'Apple Color Emoji','Segoe UI EPmoji','Segoe UI Symbol';
+    transform: translateX(0);
+    transition: transform .5s;
+}
+
+.sidenav.closed {
+    transform: translateX(-100%);
 }
 
 .nav__selectors {
@@ -114,12 +121,18 @@
     margin: 0;
     padding: 8px;
     display: flex;
+    gap: 8px;
     justify-content: center;
-    border-radius: 10px;
     list-style: none;
     font-weight: bold;
-    border-width: 10px 0;
-    border-radius: 20px;
+}
+
+.nav__result__wrapper i {
+    font-size: larger;
+}
+
+.nav__result__wrapper[unfolded] i{
+    transform: rotateZ(-90deg);
 }
 
 .nav__result__wrapper-title span {
@@ -131,6 +144,11 @@
     list-style: none;
     border-radius: 0 0 30px 30px;
     overflow: hidden;
+    transition: max-height 0.4s linear;
+}
+
+.nav__result__wrapper-list[folded] {
+    max-height: 0;
 }
 
 .nav__result__wrapper-name {
@@ -155,7 +173,7 @@
     display: block;
     width: 0;
     height: 2px;
-    background: #000;
+    background: var(--light-coral);
     transition: width .4s;
 }
 
@@ -204,33 +222,4 @@
     100% {
         max-height: 40px;
     }
-}
-
-.nav__results::-webkit-scrollbar {
-    width: 10px;
-    background-color: #f5f5f5;
-    border-radius: 50%;
-}
-
-.nav__results::-webkit-scrollbar-track {
-    background-color: #F5F5F5;
-    border-radius: 10px;
-}
-
-.nav__results::-webkit-scrollbar-thumb {
-    background-color: var(--light-coral);
-    border-radius: 10px;
-    background-image: -webkit-linear-gradient(
-        0deg,
-        rgba(255, 255, 255, 0.5) 25%,
-        transparent 25%,
-        transparent 50%,
-        rgba(255, 255, 255, 0.5) 50%,
-        rgba(255, 255, 255, 0.5) 75%,
-        transparent 75%,
-        transparent
-    );
-}
-
-.nav__results::-webkit-scrollbar-thumb:hover {
 }

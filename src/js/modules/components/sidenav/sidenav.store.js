@@ -1,12 +1,13 @@
 import { FluxStore } from '../../shared/flux/Util/Store.js'
-import { Episode } from './Epsiode.js'
-import { Character } from './Character.js'
-import { ACTION_APPEND_SIDENAV, ACTION_SET_SIDENAV, ACTION_RESET_STATE, ACTION_SET_CHARACTERS } from './sidenav.actions.js'
+import { Episode } from './model/Epsiode.js'
+import { Character } from './model/Character.js'
+import { ACTION_APPEND_SIDENAV, ACTION_SET_SIDENAV, ACTION_RESET_STATE } from './sidenav.actions.js'
+import { Location } from './model/Location.js'
 
 const sidenavStore = new FluxStore({
-    episodes: [],
-    characters: [],
-    locations: []
+    episode: [],
+    character: [],
+    location: []
 })
 
 sidenavStore.reduce = function (state, action) {
@@ -30,31 +31,23 @@ sidenavStore.reduce = function (state, action) {
             newState[type] = action.payload[type].map(item => mapToClass(item, type))
         }
         return newState
-
-    } else if(action.type === ACTION_SET_CHARACTERS().type) {
-        const newCharacters = action.characters.map(rawCharacter => new Character(rawCharacter))
-        return {
-            episodes: [],
-            characters: newCharacters,
-            locations: []
-        }
     } else if(action.type === ACTION_RESET_STATE().type) {
         return {
-            episodes: [],
-            characters: [],
-            locations: []
+            episode: [],
+            character: [],
+            location: []
         }
     } else {
         return state
     }
 
     function mapToClass(object, type) {
-        if(type === 'episodes') {
+        if(type === 'episode') {
             return new Episode(object)
-        } else if(type === 'characters') {
+        } else if(type === 'character') {
             return new Character(object)
-        } else {
-            return null
+        } else if(type === 'location') {
+            return new Location(object)
         }
     }
 }
@@ -65,8 +58,6 @@ export function getState() {
 
 sidenavStore.areEqual = function(starting, ending) {
     //TODO
-    console.log('starting state', starting)
-    console.log('ending state', ending)
     return false
 }
 
